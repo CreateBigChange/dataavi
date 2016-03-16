@@ -1,0 +1,67 @@
+#dataavi {
+    margin: 0px auto;
+    padding: 0px;
+    position: relative;
+    width: 880px;
+}
+
+#single_chart_info {
+    height: 400px;
+    width: 100%;
+}
+
+#gride_info table {
+    margin: 20px 0px;
+    padding:0px;
+}
+
+#gride_info td {
+    width: 120px;
+    text-align: center;
+}
+table {
+    border-collapse: collapse;
+}
+thead > tr {
+    border-bottom: 1px solid #000;
+}
+#single_chart {
+    border-top: 1px dashed #dddddd;
+    color: #444;
+}
+
+#single_chart input {
+    position: relative;
+    display: inline-block;
+    height: 10px;
+    padding: 7px;
+    border: #c3c3c3 1px solid;
+    width: 150px;
+    color: #999;
+    font-size: 12px;
+}
+
+
+#search_button {
+    position: relative;
+    display: inline-block;
+    left: 480px;
+}
+
+
+#search_by_name_button {
+    border: 0px ;
+    margin-left: 10px;
+    background-color: #fff;
+    color: #4395ff;
+}
+
+.single_and_compare {
+    margin: 0px;
+    padding: 0px;
+    margin-bottom: 20px;
+}
+
+#single_chart_info_title {
+    margin: 8px 0px;
+}
