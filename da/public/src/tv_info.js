@@ -196,6 +196,6 @@ var DataAvi = React.createClass({
 });
 
 ReactDOM.render(
-  <DataAvi url="http://dataavi.cg.com/api/v1/playinfo"></DataAvi>,
+  <DataAvi url={play_info_url}></DataAvi>,
   document.getElementById('dataavi')
 );
