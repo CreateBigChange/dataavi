@@ -4,7 +4,8 @@ function getcookie(objname){
         temp=ck[i].split("=");
         if(temp[0].substr(1)==objname)
             return decodeURI(unescape(temp[1]));
-      // if(temp[0]==objname) return decodeURI(unescape(temp[1]));
+        if(temp[0]==objname)
+            return decodeURI(unescape(temp[1]));
     }
     return false;
 }
@@ -32,3 +33,11 @@ String.prototype.format=function()
     s=s.replace(new RegExp("\\{"+i+"\\}","g"), arguments[i]);
   return s;
 };
+
+(function ($) {
+    $.getUrlParam = function (name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return decodeURI(r[2]); return null;
+    }
+})(jQuery);

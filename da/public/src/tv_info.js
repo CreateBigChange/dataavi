@@ -97,7 +97,8 @@ var AllPlayInfo = React.createClass({
             return (
                 <tbody key={play_info.id}>
                     <tr>
-                        <td>{play_info.name}</td>
+                        <td><a href={"./two.html?name=" + play_info.name + "&type=" +play_info.type}
+                               target="_blank">{play_info.name}</a></td>
                         <td>{play_info.time_at}</td>
                         <td>{play_info.day_play_counts}</td>
                         <td>{play_info.all_play_counts}</td>
@@ -131,25 +132,35 @@ var AllPlayInfo = React.createClass({
     }
 });
 
-
 var Nav = React.createClass({
+    componentDidMount: function() {
+        tmp = this;
+        $('.type').click(function(){
+            type = this.name;
+            tmp.props.change_by_type(type);
+        });
+        $('.platform').click(function(){
+            platform = this.name;
+            tmp.props.change_by_type_and_platform(getcookie('type'), platform);
+        });
+    },
     render: function() {
         return (
             <div id="nav">
                 <ul>
                     <li id="filter_1">
-                        <button onClick={this.props.change2Teleplay}>电视剧</button>
-                        <button onClick={this.props.change2Variety}>综艺</button>
+                        <button className="type" name="teleplay">电视剧</button>
+                        <button className="type" name="variety">综艺</button>
                         <input id="search_input" type="text" placeholder="输入剧名/综艺搜索"  />
                         <button id="search_button">搜索</button>
                     </li>
                     <li id="filter_2">
-                        <button>爱奇艺</button>
-                        <button>腾讯</button>
-                        <button>优酷</button>
-                        <button>搜狐</button>
-                        <button>乐视</button>
-                        <button>芒果TV</button>
+                        <button className='platform' name="iqy">爱奇艺</button>
+                        <button className='platform' name="qq">腾讯</button>
+                        <button className='platform' name="xx">优酷</button>
+                        <button className='platform' name="xx">搜狐</button>
+                        <button className='platform' name="xx">乐视</button>
+                        <button className='platform' name="xx">芒果TV</button>
                     </li>
                 </ul>
             </div>
@@ -157,16 +168,16 @@ var Nav = React.createClass({
     }
 });
 var DataAvi = React.createClass({
-    change2Teleplay:function(){
-        this.loadPlayInfo('teleplay');
+    change_by_type_and_platform:function(type, platform){
+        this.loadPlayInfo(type, platform);
     },
-    change2Variety:function(){
-        setcookie('type', 'variety');
-        this.loadPlayInfo('variety');
+    change_by_type:function(type){
+        setcookie('type', type);
+        this.loadPlayInfo(type, 'all');
     },
-    loadPlayInfo: function(type) {
+    loadPlayInfo: function(type, platform) {
         $.ajax({
-            url: this.props.url + '?type=' + type,
+            url: this.props.url + '?type=' + type + '&platform=' + platform,
             cache: false,
             type: 'get',
             success: function(play_infos) {
@@ -182,12 +193,15 @@ var DataAvi = React.createClass({
         return {data: []};
     },
     componentDidMount: function() {
-        this.loadPlayInfo('teleplay');
+        setcookie('type', 'teleplay');
+        this.loadPlayInfo('teleplay', 'all');
     },
     render: function() {
         return (
             <div>
-                <Nav change2Variety={this.change2Variety} change2Teleplay={this.change2Teleplay}></Nav>
+                <Nav change_by_type={this.change_by_type}
+                     change_by_type_and_platform={this.change_by_type_and_platform}
+                ></Nav>
                 <AllPlayInfo data={this.state.data}></AllPlayInfo>
                 <ChartInfo url={this.props.url}></ChartInfo>
             </div>
@@ -196,6 +210,6 @@ var DataAvi = React.createClass({
 });
 
 ReactDOM.render(
-  <DataAvi url={play_info_url}></DataAvi>,
+  <DataAvi url="./api/v1/playinfo"></DataAvi>,
   document.getElementById('dataavi')
 );

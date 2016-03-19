@@ -4,7 +4,9 @@
     position: relative;
     width: 880px;
 }
-
+a {
+    color: #444;
+}
 #single_chart_info {
     height: 400px;
     width: 100%;
@@ -21,6 +23,7 @@
 }
 table {
     border-collapse: collapse;
+
 }
 thead > tr {
     border-bottom: 1px solid #000;

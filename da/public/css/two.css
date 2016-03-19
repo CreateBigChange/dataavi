@@ -1,0 +1,45 @@
+body {
+    font-family: "Hiragino Sans GB","Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";
+    margin: 0px;
+    padding: 0px;
+}
+
+#two {
+    margin: 0px auto;
+    padding: 0px;
+    position: relative;
+    width: 880px;
+}
+a {
+    color: #444;
+}
+
+#intro div {
+    margin: 10px 0px;
+}
+.intro div {
+    text-indent:25px;
+}
+#intro span {
+    color: #000;
+}
+
+#all_play_info table {
+    margin: 20px 0px;
+    padding:0px;
+    border-collapse: collapse;
+}
+
+#all_play_info table  td{
+    width: 150px;
+    text-align: center;
+}
+
+#all_play_info .title {
+    font-size: 16px;
+}
+#all_play_info_chart_hours, #all_play_info_chart_day{
+    height: 400px;
+    width: 100%;
+    margin-bottom: 100px;
+}
