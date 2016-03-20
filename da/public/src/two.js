@@ -202,6 +202,7 @@ var Two = React.createClass({
     loadTvInfo: function() {
         type = $.getUrlParam('type');
         name = $.getUrlParam('name');
+        $("#home_title").text(name);
         $.ajax({
             url: this.props.url + '?type=' + type + '&name=' + name,
             cache: false,
