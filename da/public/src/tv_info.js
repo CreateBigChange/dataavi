@@ -157,10 +157,10 @@ var Nav = React.createClass({
                     <li id="filter_2">
                         <button className='platform' name="iqy">爱奇艺</button>
                         <button className='platform' name="qq">腾讯</button>
-                        <button className='platform' name="xx">优酷</button>
-                        <button className='platform' name="xx">搜狐</button>
-                        <button className='platform' name="xx">乐视</button>
-                        <button className='platform' name="xx">芒果TV</button>
+                        <button className='platform' name="yk">优酷</button>
+                        <button className='platform' name="sh">搜狐</button>
+                        <button className='platform' name="let">乐视</button>
+                        <button className='platform' name="mg">芒果TV</button>
                     </li>
                 </ul>
             </div>
