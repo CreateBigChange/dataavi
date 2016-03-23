@@ -188,7 +188,8 @@ var Intro = React.createClass({
                         <div>{this.props.tv_info.cast_member}</div>
                     </div>
                         <div className="intro"><span>视频简介: </span>
-                        <div>{this.props.tv_info.description}</div>
+                        <div dangerouslySetInnerHTML={{__html: this.props.tv_info.description}}>
+                        </div>
                     </div>
                 </div>
             );

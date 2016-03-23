@@ -41,3 +41,13 @@ String.prototype.format=function()
     if (r != null) return decodeURI(r[2]); return null;
     }
 })(jQuery);
+
+
+function rawMarkup(txt) {
+    if (!txt) {
+        return { __html: "" };
+    }
+    console.log(txt);
+    rawMark = marked(txt, {sanitize: false});
+    return { __html: rawMark };
+};
