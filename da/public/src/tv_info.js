@@ -1,4 +1,6 @@
-
+var _limit = 20;
+var _offset = 0;
+var _continue = true
 var option = {
         title : {
             text: '视频播放今日一览',
@@ -95,8 +97,7 @@ var AllPlayInfo = React.createClass({
     render: function() {
         var playInfoNodes = this.props.data.map(function(play_info) {
             return (
-                <tbody key={play_info.id}>
-                    <tr>
+                    <tr key={play_info.id}>
                         <td><a href={"./two.html?name=" + play_info.name + "&type=" +play_info.type}
                                target="_blank">{play_info.name}</a></td>
                         <td>{play_info.time_at}</td>
@@ -106,7 +107,6 @@ var AllPlayInfo = React.createClass({
                         <td>{play_info.current_number}/{play_info.all_number}</td>
                         <td>{play_info.cast_member}</td>
                     </tr>
-                </tbody>
             );
         });
         return (
@@ -124,7 +124,14 @@ var AllPlayInfo = React.createClass({
                                 <td>主演</td>
                             </tr>
                         </thead>
-                        {playInfoNodes}
+                        <tbody>
+                            {playInfoNodes}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td id ="page_turn" colSpan='7' onClick={this.props.pageTurn}>{this.props.flag}</td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -133,15 +140,29 @@ var AllPlayInfo = React.createClass({
 });
 
 var Nav = React.createClass({
+    search: function (type) {
+        name = this.refs.search_input.value;
+        if (name) {
+            url = './two.html?name='+ name + '&type=' + type;
+            window.open(url);
+        }
+    },
     componentDidMount: function() {
         tmp = this;
         $('.type').click(function(){
             type = this.name;
-            tmp.props.change_by_type(type);
+            _limit = 20;
+            _offset = 0;
+            _continue = true;
+            tmp.props.change_by_type(type, _limit, _offset);
         });
         $('.platform').click(function(){
+            _limit = 20;
+            _offset = 0;
+            _continue = true;
             platform = this.name;
-            tmp.props.change_by_type_and_platform(getcookie('type'), platform);
+            setcookie('platform', platform);
+            tmp.props.change_by_type_and_platform(getcookie('type'), platform, _limit, _offset);
         });
     },
     render: function() {
@@ -151,8 +172,9 @@ var Nav = React.createClass({
                     <li id="filter_1">
                         <button className="type" name="teleplay">电视剧</button>
                         <button className="type" name="variety">综艺</button>
-                        <input id="search_input" type="text" placeholder="输入剧名/综艺搜索"  />
-                        <button id="search_button">搜索</button>
+                        <input id="search_input" type="text" placeholder="输入剧名/综艺搜索" ref='search_input' />
+                        <button className="search_button" onClick={this.search.bind(this, type='teleplay')}>搜索电视</button>
+                        <button className="search_button" onClick={this.search.bind(this, type='variety')}>搜索综艺</button>
                     </li>
                     <li id="filter_2">
                         <button className='platform' name="iqy">爱奇艺</button>
@@ -167,21 +189,51 @@ var Nav = React.createClass({
         );
     }
 });
+
 var DataAvi = React.createClass({
-    change_by_type_and_platform:function(type, platform){
-        this.loadPlayInfo(type, platform);
-    },
-    change_by_type:function(type){
-        setcookie('type', type);
-        this.loadPlayInfo(type, 'all');
-    },
-    loadPlayInfo: function(type, platform) {
+    pageTurn: function() {
+        if (!_continue) {
+            return false;
+        }
+        tvInfos = this.state.data;
+        play_infos = {}
+        type = getcookie('type')
+        platform = getcookie('platform')
+        _offset += _limit
         $.ajax({
-            url: this.props.url + '?type=' + type + '&platform=' + platform,
+            url: this.props.url + '?type=' + type + '&platform=' + platform + '&limit=' + _limit + '&offset=' + _offset,
+            cache: false,
+            type: 'get',
+            success: function(play_infos) {
+                play_infos = JSON.parse(play_infos)
+                if (play_infos.length < _limit) {
+                    _continue = false;
+                    this.setState({flag: ""});
+                }
+                newtvInfos = tvInfos.concat(play_infos);
+                this.setState({data: newtvInfos});
+            }.bind(this),
+            error: function(xhr, status,err) {
+                console.log(xhr, status, err.toString());
+            }
+        });
+    },
+    change_by_type_and_platform: function(type, platform, limit, offset) {
+        this.loadPlayInfo(type, platform, limit, offset);
+    },
+    change_by_type: function(type, limit, offset) {
+        setcookie('type', type);
+        setcookie('platform', 'all');
+        this.loadPlayInfo(type, 'all', limit, offset);
+    },
+    loadPlayInfo: function(type, platform, limit, offset) {
+        $.ajax({
+            url: this.props.url + '?type=' + type + '&platform=' + platform + '&limit=' + limit + '&offset=' + offset,
             cache: false,
             type: 'get',
             success: function(play_infos) {
                 this.setState({data: JSON.parse(play_infos)});
+                this.setState({flag: "..."});
             }.bind(this),
             error: function(xhr, status,err) {
                 console.log(xhr, status, err.toString());
@@ -190,11 +242,11 @@ var DataAvi = React.createClass({
     },
     getInitialState: function() {
         setcookie('type', 'teleplay');
-        return {data: []};
+        setcookie('platform', 'all');
+        return {data: [],flag: "..."};
     },
     componentDidMount: function() {
-        setcookie('type', 'teleplay');
-        this.loadPlayInfo('teleplay', 'all');
+        this.loadPlayInfo('teleplay', 'all',_limit, _offset);
     },
     render: function() {
         return (
@@ -202,7 +254,7 @@ var DataAvi = React.createClass({
                 <Nav change_by_type={this.change_by_type}
                      change_by_type_and_platform={this.change_by_type_and_platform}
                 ></Nav>
-                <AllPlayInfo data={this.state.data}></AllPlayInfo>
+                <AllPlayInfo data={this.state.data} pageTurn={this.pageTurn} flag={this.state.flag}></AllPlayInfo>
                 <ChartInfo url={this.props.url}></ChartInfo>
             </div>
         );

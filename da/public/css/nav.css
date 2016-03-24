@@ -37,7 +37,7 @@ ul {
 #search_input {
     position: relative;
     display: inline-block;
-    left: 480px;
+    left: 400px;
     height: 15px;
     padding: 7px;
     border: #c3c3c3 1px solid;
@@ -45,8 +45,8 @@ ul {
     color: #999;
 }
 
-#search_button {
+.search_button {
     position: relative;
     display: inline-block;
-    left: 480px;
+    left: 413px;
 }
