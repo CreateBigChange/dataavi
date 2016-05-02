@@ -45,8 +45,21 @@ ul {
     color: #999;
 }
 
+
 .search_button {
     position: relative;
     display: inline-block;
     left: 413px;
+}
+
+
+#download {
+    display: inline-block;
+    position: relative;
+    float: right;
+    height: 100%;
+    margin-top: 35px !important;
+    cursor: pointer;
+    width: 100px !important;
+    background: none;
 }

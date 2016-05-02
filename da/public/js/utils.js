@@ -1,6 +1,5 @@
 function getcookie(objname){
     var ck=document.cookie.split(';');
-    console.log(ck);
     for(var i=0;i<ck.length;i++){
         temp=ck[i].split("=");
         if(temp[0].substr(1)==objname)

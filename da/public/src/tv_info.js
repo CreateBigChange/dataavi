@@ -168,7 +168,14 @@ var Nav = React.createClass({
             _offset = 0;
             _continue = true;
             platform = this.name;
+            setcookie('platform', platform);
             tmp.props.change_by_type_and_platform(getcookie('type'), platform, _limit, _offset);
+        });
+
+        $('#download').click(function() {
+            $(this).prop("disabled", true);
+            $("body").append("<iframe src='" + "./api/v1/download?limit=99&type=" + getcookie('type') + "&platform=" + getcookie('platform') +"' style='display: none;' ></iframe>");
+            $(this).animate({disabled: false}, 5000);
         });
     },
     render: function() {
@@ -189,6 +196,7 @@ var Nav = React.createClass({
                         <button className='platform' name="sh">搜狐</button>
                         <button className='platform' name="let">乐视</button>
                         <button className='platform' name="mg">芒果TV</button>
+                        <button id='download'>下载本页数据</button>
                     </li>
                 </ul>
             </div>
@@ -228,8 +236,8 @@ var DataAvi = React.createClass({
         this.loadPlayInfo(type, platform, limit, offset);
     },
     change_by_type: function(type, limit, offset) {
-        // setcookie('type', type);
-        // setcookie('platform', 'all');
+        setcookie('type', type);
+        setcookie('platform', 'all');
         this.loadPlayInfo(type, 'all', limit, offset);
     },
     loadPlayInfo: function(type, platform, limit, offset) {
