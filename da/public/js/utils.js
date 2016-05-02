@@ -1,5 +1,6 @@
 function getcookie(objname){
     var ck=document.cookie.split(';');
+    console.log(ck);
     for(var i=0;i<ck.length;i++){
         temp=ck[i].split("=");
         if(temp[0].substr(1)==objname)
@@ -14,7 +15,7 @@ function getcookie(objname){
 function setcookie(name,value)
 {
     var exp = new Date();
-    exp.setTime(exp.getTime() +3600 * 24);
+    exp.setTime(exp.getTime() + 3600 * 24 * 1000);
     document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
 }
 function delcookie(name)

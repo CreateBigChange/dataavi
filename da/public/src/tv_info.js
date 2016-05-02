@@ -100,12 +100,12 @@ var AllPlayInfo = React.createClass({
                     <tr key={play_info.id}>
                         <td><a href={"./two.html?name=" + play_info.name + "&type=" +play_info.type}
                                target="_blank">{play_info.name}</a></td>
-                        <td>{play_info.time_at}</td>
-                        <td>{play_info.day_play_counts}</td>
-                        <td>{play_info.all_play_counts}</td>
                         <td>{play_info.avg_play}</td>
+                        <td>{play_info.all_play_counts}</td>
+                        <td>{play_info.day_play_counts}</td>
                         <td>{play_info.current_number}/{play_info.all_number}</td>
-                        <td>{play_info.cast_member}</td>
+                        <td className="cast_member">{play_info.cast_member}</td>
+                        <td>{play_info.time_at}</td>
                     </tr>
             );
         });
@@ -116,12 +116,12 @@ var AllPlayInfo = React.createClass({
                         <thead>
                             <tr>
                                 <td>剧名</td>
-                                <td>日期</td>
-                                <td>今日播放量(万)</td>
-                                <td>总播放量(万)</td>
                                 <td>集均播放量(万)</td>
+                                <td>总播放量(万)</td>
+                                <td>今日播放量(万)</td>
                                 <td>更新_集/共_集</td>
                                 <td>主演</td>
+                                <td>日期</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -150,6 +150,9 @@ var Nav = React.createClass({
     componentDidMount: function() {
         tmp = this;
         $('.type').click(function(){
+            $(".type").css({color: "#444", background: ""});
+            $(".platform").css({color: "#444", background: ""});
+            $(this).css({color: "#fff", background: "#878787"});
             type = this.name;
             _limit = 20;
             _offset = 0;
@@ -157,11 +160,14 @@ var Nav = React.createClass({
             tmp.props.change_by_type(type, _limit, _offset);
         });
         $('.platform').click(function(){
+            $(this).prop("disabled", true);
+            $(this).animate({disabled: false}, 3000);
+            $(".platform").css({color: "#444", background: ""});
+            $(this).css({color: "#fff", background: "#878787"});
             _limit = 20;
             _offset = 0;
             _continue = true;
             platform = this.name;
-            setcookie('platform', platform);
             tmp.props.change_by_type_and_platform(getcookie('type'), platform, _limit, _offset);
         });
     },
@@ -222,8 +228,8 @@ var DataAvi = React.createClass({
         this.loadPlayInfo(type, platform, limit, offset);
     },
     change_by_type: function(type, limit, offset) {
-        setcookie('type', type);
-        setcookie('platform', 'all');
+        // setcookie('type', type);
+        // setcookie('platform', 'all');
         this.loadPlayInfo(type, 'all', limit, offset);
     },
     loadPlayInfo: function(type, platform, limit, offset) {
@@ -241,8 +247,8 @@ var DataAvi = React.createClass({
         });
     },
     getInitialState: function() {
-        setcookie('type', 'teleplay');
         setcookie('platform', 'all');
+        setcookie('type', 'teleplay');
         return {data: [],flag: "..."};
     },
     componentDidMount: function() {
