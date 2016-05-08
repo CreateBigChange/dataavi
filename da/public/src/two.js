@@ -44,6 +44,39 @@ var option = {
         ]
 };
 
+var Nav = React.createClass({
+    search: function (type) {
+        name = this.refs.search_input.value;
+        if (name) {
+            url = './two.html?name='+ name + '&type=' + type;
+            window.location.href = url;
+        }
+    },
+    componentDidMount: function() {
+        if($.getUrlParam("type") == "teleplay") {
+            $(".type:first").css({background: "#FFAA33"});
+        } else {
+            $(".type:last").css({background: "#FFAA33"});
+        }
+    },
+    render: function() {
+        return (
+            <div id="nav">
+                <ul>
+                    <li id="filter_1">
+                        <div className="margin-position">
+                            <button className="type" name="teleplay">电视剧</button>
+                            <button className="type" name="variety">综艺</button>
+                            <input id="search_input" type="text" placeholder="输入剧名/综艺搜索" ref='search_input' />
+                            <button className="search_button border-right" onClick={this.search.bind(this, type='teleplay')}>搜索电视</button>
+                            <button className="search_button" onClick={this.search.bind(this, type='variety')}>搜索综艺</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        );
+    }
+});
 
 var PlayInfoChartDay = React.createClass({
     loadPlayInfo: function() {
@@ -157,7 +190,7 @@ var AllPlayInfoTable = React.createClass({
 
         return (
             <div id="all_play_info">
-                <div className="title">各平台播放量一览：</div>
+                <div className="title">各平台播放量一览</div>
                 <table>
                     <thead>
                         <tr>
@@ -181,8 +214,10 @@ var Intro = React.createClass({
         if (this.props.tv_info) {
             return (
                 <div id="intro">
+                    <div className="name">
+                        <span>剧名：</span> {this.props.tv_info.name}
+                    </div>
                     <div><span>类型：</span> {this.props.tv_info.type}</div>
-                    <div><span>剧名：</span> {this.props.tv_info.name}</div>
                     <div><span>更新:</span> {this.props.tv_info.current_number} 集/<span>共:</span> {this.props.tv_info.all_number} 集</div>
                     <div className="intro"><span>主要演员：</span>
                         <div>{this.props.tv_info.cast_member}</div>
@@ -196,6 +231,16 @@ var Intro = React.createClass({
         } else {
             return <div></div>
         }
+    }
+});
+
+var Logo = React.createClass({
+    render: function(){
+        return (
+            <div className="logo">
+
+            </div>
+        );
     }
 });
 
@@ -225,6 +270,8 @@ var Two = React.createClass({
     render: function() {
         return (
             <div>
+                <Logo></Logo>
+                <Nav></Nav>
                 <Intro tv_info={this.state.tv_info}></Intro>
                 <AllPlayInfoTable url={this.props.url}></AllPlayInfoTable>
                 <PlayInfoChartDay url={this.props.url}></PlayInfoChartDay>

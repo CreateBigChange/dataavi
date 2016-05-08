@@ -84,8 +84,8 @@ var ChartInfo = React.createClass({
             <div id="single_chart">
                 <h3 id="single_chart_info_title" >剧目/综艺今日播放一览</h3>
                 <div className="single_and_compare">
-                    <input id="search_by_name" type="text" placeholder="多个名字请用空格分隔"  ref="search_by_name"/>
-                    <a id="search_by_name_button" onClick={this.loadPlayInfo}>搜索</a>
+                    <input id="search_by_name" type="text" placeholder="多个名字请用逗号分隔"  ref="search_by_name"/>
+                    <button id="search_by_name_button" onClick={this.loadPlayInfo}>搜索</button>
                 </div>
                 <div id="single_chart_info" ></div>
             </div>
@@ -148,11 +148,12 @@ var Nav = React.createClass({
         }
     },
     componentDidMount: function() {
+        $(".type:first").css({background: "#FFAA33"});
         tmp = this;
         $('.type').click(function(){
-            $(".type").css({color: "#444", background: ""});
-            $(".platform").css({color: "#444", background: ""});
-            $(this).css({color: "#fff", background: "#878787"});
+            $(".type").css({color: "#fff", background: "none"});
+            $(".platform").css({color: "#878787", background: ""});
+            $(this).css({color: "#fff", background: "#FFAA33"});
             type = this.name;
             _limit = 20;
             _offset = 0;
@@ -162,8 +163,8 @@ var Nav = React.createClass({
         $('.platform').click(function(){
             $(this).prop("disabled", true);
             $(this).animate({disabled: false}, 3000);
-            $(".platform").css({color: "#444", background: ""});
-            $(this).css({color: "#fff", background: "#878787"});
+            $(".platform").css({color: "#878787", background: ""});
+            $(this).css({color: "#fff", background: "#ff8800"});
             _limit = 20;
             _offset = 0;
             _continue = true;
@@ -183,11 +184,13 @@ var Nav = React.createClass({
             <div id="nav">
                 <ul>
                     <li id="filter_1">
-                        <button className="type" name="teleplay">电视剧</button>
-                        <button className="type" name="variety">综艺</button>
-                        <input id="search_input" type="text" placeholder="输入剧名/综艺搜索" ref='search_input' />
-                        <button className="search_button" onClick={this.search.bind(this, type='teleplay')}>搜索电视</button>
-                        <button className="search_button" onClick={this.search.bind(this, type='variety')}>搜索综艺</button>
+                        <div className="margin-position">
+                            <button className="type" name="teleplay">电视剧</button>
+                            <button className="type" name="variety">综艺</button>
+                            <input id="search_input" type="text" placeholder="输入剧名/综艺搜索" ref='search_input' />
+                            <button className="search_button border-right" onClick={this.search.bind(this, type='teleplay')}>搜索电视</button>
+                            <button className="search_button" onClick={this.search.bind(this, type='variety')}>搜索综艺</button>
+                        </div>
                     </li>
                     <li id="filter_2">
                         <button className='platform' name="iqy">爱奇艺</button>
@@ -199,6 +202,16 @@ var Nav = React.createClass({
                         <button id='download'>下载本页数据</button>
                     </li>
                 </ul>
+            </div>
+        );
+    }
+});
+
+var Logo = React.createClass({
+    render: function(){
+        return (
+            <div className="logo">
+
             </div>
         );
     }
@@ -265,9 +278,11 @@ var DataAvi = React.createClass({
     render: function() {
         return (
             <div>
+                <Logo></Logo>
                 <Nav change_by_type={this.change_by_type}
                      change_by_type_and_platform={this.change_by_type_and_platform}
                 ></Nav>
+                <div className="border-split"></div>
                 <AllPlayInfo data={this.state.data} pageTurn={this.pageTurn} flag={this.state.flag}></AllPlayInfo>
                 <ChartInfo url={this.props.url}></ChartInfo>
             </div>

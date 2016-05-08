@@ -2,7 +2,7 @@
     margin: 0px auto;
     padding: 0px;
     position: relative;
-    width: 880px;
+    width: 100%;
 }
 a {
     color: #444;
@@ -30,8 +30,8 @@ tfoot tr td {
     cursor: pointer;
 }
 
-thead > tr {
-    border-bottom: 1px solid #000;
+tbody > tr {
+    border-bottom: 1px solid #eee;
 }
 #single_chart {
     border-top: 1px dashed #dddddd;
@@ -42,19 +42,22 @@ thead > tr {
     position: relative;
     display: inline-block;
     height: 10px;
-    padding: 7px;
+    padding: 1px;
     border: #c3c3c3 1px solid;
     width: 150px;
     color: #999;
     font-size: 12px;
+    height: 20px;
 }
 
 
 #search_by_name_button {
+    height: 20px;
     border: 0px ;
-    margin-left: 10px;
-    background-color: #fff;
-    color: #4395ff;
+    color: #878787;
+    height: 24px;
+    padding: 1px;
+    cursor:pointer;
 }
 
 .single_and_compare {
@@ -65,4 +68,11 @@ thead > tr {
 
 #single_chart_info_title {
     margin: 8px 0px;
+    background: #ff8800;
+    color: #fff;
+    height: 30px;
+    display: inline-block;
+    text-align: center;
+    line-height: 30px;
+    padding: 5px
 }
