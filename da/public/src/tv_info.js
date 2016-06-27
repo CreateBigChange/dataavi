@@ -175,7 +175,7 @@ var Nav = React.createClass({
 
         $('#download').click(function() {
             $(this).prop("disabled", true);
-            $("body").append("<iframe src='" + "./api/v1/download?limit=99&type=" + getcookie('type') + "&platform=" + getcookie('platform') +"' style='display: none;' ></iframe>");
+            $("body").append("<iframe src='" + "./api/v1/user/1/download?limit=99&type=" + getcookie('type') + "&platform=" + getcookie('platform') +"' style='display: none;' ></iframe>");
             $(this).animate({disabled: false}, 5000);
         });
     },
@@ -291,6 +291,6 @@ var DataAvi = React.createClass({
 });
 
 ReactDOM.render(
-  <DataAvi url="./api/v1/playinfo"></DataAvi>,
+  <DataAvi url="./api/v1/user/1/playinfo"></DataAvi>,
   document.getElementById('dataavi')
 );

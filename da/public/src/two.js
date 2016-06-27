@@ -282,7 +282,7 @@ var Two = React.createClass({
 });
 
 ReactDOM.render(
-  <Two url="./api/v1/two"></Two>,
+  <Two url="./api/v1/user/1/two"></Two>,
   document.getElementById('two')
 );
                 // <AllPlayInfoTable data={this.state.data}></AllPlayInfoTable>
