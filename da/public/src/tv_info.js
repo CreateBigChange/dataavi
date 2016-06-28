@@ -183,7 +183,7 @@ if (!user_id || !sid) {
                 $(this).animate({disabled: false}, 5000);
             });
             $('#upload').click(function() {
-                window.location.href = "./upload.html?user_id=" + user_id + "&sid=" + sid;
+                window.open("./upload.html?user_id=" + user_id + "&sid=" + sid);
             });
         },
         render: function() {
