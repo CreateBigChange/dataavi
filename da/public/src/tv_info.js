@@ -104,7 +104,6 @@ var AllPlayInfo = React.createClass({
                         <td>{play_info.all_play_counts}</td>
                         <td>{play_info.day_play_counts}</td>
                         <td>{play_info.current_number}/{play_info.all_number}</td>
-                        <td className="cast_member">{play_info.cast_member}</td>
                         <td>{play_info.time_at}</td>
                     </tr>
             );
@@ -120,7 +119,6 @@ var AllPlayInfo = React.createClass({
                                 <td>总播放量(万)</td>
                                 <td>今日播放量(万)</td>
                                 <td>更新_集/共_集</td>
-                                <td>主演</td>
                                 <td>日期</td>
                             </tr>
                         </thead>
