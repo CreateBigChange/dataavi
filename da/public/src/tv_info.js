@@ -7,6 +7,7 @@ if (!user_id || !sid) {
     var _limit = 20;
     var _offset = 0;
     var _continue = true
+    var platform = "all";
     var option = {
             title : {
                 text: '视频播放今日一览',
@@ -100,6 +101,16 @@ if (!user_id || !sid) {
     });
 
     var AllPlayInfo = React.createClass({
+        componentDidMount: function(){
+            $(".order-by-def").css({color: "red"});
+            cur = this;
+            $(".order-by").click(function(){
+                $(this).siblings().css({color: "#fff"});
+                $(this).css({color: "red"});
+                var order_by = $(this).attr("name");
+                cur.props.orderBy(getcookie('type'), getcookie('platform'), order_by);
+            });
+        },
         render: function() {
             var playInfoNodes = this.props.data.map(function(play_info) {
                 return (
@@ -121,9 +132,9 @@ if (!user_id || !sid) {
                             <thead>
                                 <tr>
                                     <td>剧名</td>
-                                    <td>集均播放量(万)</td>
-                                    <td>总播放量(万)</td>
-                                    <td>今日播放量(万)</td>
+                                    <td className="order-by"  name="avg_play">集均播放量(万)</td>
+                                    <td className="order-by"  name="all_play_counts">总播放量(万)</td>
+                                    <td className="order-by order-by-def" name="day_play_counts">今日播放量(万)</td>
                                     <td>更新_集/共_集</td>
                                     <td>日期</td>
                                 </tr>
@@ -230,13 +241,14 @@ if (!user_id || !sid) {
             if (!_continue) {
                 return false;
             }
+            var order_by = order_by ? order_by : "day_play_counts";
             tvInfos = this.state.data;
             play_infos = {}
             type = getcookie('type')
             platform = getcookie('platform')
             _offset += _limit
             $.ajax({
-                url: this.props.url + '?type=' + type + '&platform=' + platform + '&limit=' + _limit + '&offset=' + _offset + "&sid=" + sid,
+                url: this.props.url + '?type=' + type + '&platform=' + platform + '&limit=' + _limit + '&offset=' + _offset + "&sid=" + sid + "&order_by=" + order_by,
                 cache: false,
                 type: 'get',
                 success: function(play_infos) {
@@ -253,17 +265,23 @@ if (!user_id || !sid) {
                 }
             });
         },
+        orderBy: function(type, platform, order_by) {
+            _offset = 0;
+            _limit = 20;
+            this.loadPlayInfo(type, platform, _limit, _offset, order_by);
+        },
         change_by_type_and_platform: function(type, platform, limit, offset) {
-            this.loadPlayInfo(type, platform, limit, offset);
+            this.loadPlayInfo(type, platform, limit, offset, false);
         },
         change_by_type: function(type, limit, offset) {
             setcookie('type', type);
             setcookie('platform', 'all');
-            this.loadPlayInfo(type, 'all', limit, offset);
+            this.loadPlayInfo(type, 'all', limit, offset, false);
         },
-        loadPlayInfo: function(type, platform, limit, offset) {
+        loadPlayInfo: function(type, platform, limit, offset, order_by) {
+            order_by = order_by ? order_by : "day_play_counts";
             $.ajax({
-                url: this.props.url + '?type=' + type + '&platform=' + platform + '&limit=' + limit + '&offset=' + offset  + "&sid=" + sid,
+                url: this.props.url + '?type=' + type + '&platform=' + platform + '&limit=' + limit + '&offset=' + offset  + "&sid=" + sid + "&order_by=" + order_by,
                 cache: false,
                 type: 'get',
                 success: function(play_infos) {
@@ -291,7 +309,7 @@ if (!user_id || !sid) {
                          change_by_type_and_platform={this.change_by_type_and_platform}
                     ></Nav>
                     <div className="border-split"></div>
-                    <AllPlayInfo data={this.state.data} pageTurn={this.pageTurn} flag={this.state.flag}></AllPlayInfo>
+                    <AllPlayInfo data={this.state.data} pageTurn={this.pageTurn} flag={this.state.flag} orderBy={this.orderBy}></AllPlayInfo>
                     <ChartInfo url={this.props.url}></ChartInfo>
                 </div>
             );
