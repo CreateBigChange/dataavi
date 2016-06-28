@@ -182,6 +182,9 @@ if (!user_id || !sid) {
                 $("body").append("<iframe src='" + "./api/v1/user/"+user_id+"/download?limit=99&type=" + getcookie('type') + "&platform=" + getcookie('platform') +"' style='display: none;' ></iframe>");
                 $(this).animate({disabled: false}, 5000);
             });
+            $('#upload').click(function() {
+                window.location.href = "./upload.html?user_id=" + user_id + "&sid=" + sid;
+            });
         },
         render: function() {
             return (
@@ -204,6 +207,7 @@ if (!user_id || !sid) {
                             <button className='platform' name="let">乐视</button>
                             <button className='platform' name="mg">芒果TV</button>
                             <button id='download'>下载本页数据</button>
+                            <button id='upload'>上传失踪视频</button>
                         </li>
                     </ul>
                 </div>
