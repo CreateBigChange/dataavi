@@ -176,6 +176,7 @@ $(function() {
                                 <td>{play_info.all_play_counts}</td>
                                 <td>{play_info.avg_play}</td>
                                 <td>{play_info.day_play_counts}</td>
+                                <td>{play_info.time_at}</td>
                             </tr>
                             );
                     });
@@ -204,6 +205,7 @@ $(function() {
                                 <td>总播放(万)</td>
                                 <td>集均播放(万)</td>
                                 <td>今日播放(万)</td>
+                                <td>最近抓取更新时间</td>
                             </tr>
                         </thead>
                         <tbody>
