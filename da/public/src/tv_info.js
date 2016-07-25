@@ -8,6 +8,7 @@ if (!user_id || !sid) {
     var _offset = 0;
     var _continue = true
     var platform = "all";
+    var order_by = "day_play_counts";
     var option = {
             title : {
                 text: '视频播放今日一览',
@@ -107,7 +108,7 @@ if (!user_id || !sid) {
             $(".order-by").click(function(){
                 $(this).siblings().css({color: "#fff"});
                 $(this).css({color: "red"});
-                var order_by = $(this).attr("name");
+                order_by = $(this).attr("name");
                 cur.props.orderBy(getcookie('type'), getcookie('platform'), order_by);
             });
         },
@@ -241,7 +242,7 @@ if (!user_id || !sid) {
             if (!_continue) {
                 return false;
             }
-            var order_by = order_by ? order_by : "day_play_counts";
+            order_by = order_by ? order_by : "day_play_counts";
             tvInfos = this.state.data;
             play_infos = {}
             type = getcookie('type')
