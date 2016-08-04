@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <title>SDMP</title>
+    <meta name="keywords" content="顺丰数据管理平台"/>
+    <meta name="description" content="顺丰数据管理平台,手机版"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--JAVASRIPT-->
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/Angular.js"></script>
+
+    <script src="assets/js/flisnap.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/supersized.css">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+
+    <style>
+        a{
+            color:#ffffff;
+        }
+        head > tr > td {;
+        }
+
+        /*重置{*/
+        body, div, span {
+            padding: 0;
+            margin: 0;
+        }
+
+        /*}重置*/
+        .all {
+            width: 100%;
+            margin: 0px auto 0;
+            overflow: hidden;
+        }
+
+        .inner {
+            width: 748px;
+
+        }
+        .inner > div {
+
+            float: left;
+            font-weight: bold;
+            text-align: center;
+        }
+        .pointer {
+            width: 256px;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+        .pointer > span {
+            float: left;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin: 0 5px;
+            border: 1px #000 solid;
+        }
+        .color {
+            background: #ff0;
+        }
+        /* 定义模态对话框外面的覆盖层样式 */
+        #mymodal-overlay {
+            visibility: hidden;
+            position: absolute; /* 使用绝对定位或固定定位  */
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 30%;
+            top: 120px;
+            text-align: center;
+            z-index: 100;
+            background-color: #333;
+            opacity: 0.5; /* 背景半透明 */
+        }
+
+        /* 模态框样式 */
+        .modal-data {
+            display: none;
+            width: 300px;
+            margin: 100px auto;
+            background-color: #fff;
+            border: 1px solid #000;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .logImg {
+            height: 40px;
+            margin-left: -30px;
+        }
+
+        .head {
+            background: #ff6600;
+            min-height: 60px;
+        }
+
+        .head-cell {
+            font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+            text-align: center;
+            color: #ffffff;
+            line-height: 60px;
+            height: 60px;
+            margin: 0px;
+        }
+
+        .my-form-control {
+            z-index: 2;
+            width: 100%;
+            margin-bottom: 0;
+            width: 100%;
+            height: 34px;
+            font-size: 14px;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s, box-shadow
+        }
+
+        .body {
+
+
+        }
+
+        .footer {
+            background: #ff6600;
+            min-height: 60px;
+            height: 60px;
+            line-height: 60px;
+            color: #ffffff;
+        }
+
+        .threed {
+            text-align: center;
+            color: #fafafa;
+            letter-spacing: 0;
+            text-shadow: 0px 1px 0px #999, 0px 2px 0px #888, 0px 3px 0px #777, 0px 4px 0px #666, 0px 5px 0px #555, 0px 6px 0px #444, 0px 7px 0px #333, 0px 8px 7px #001135
+        }
+
+        .menue {
+            min-height: 60px;
+            color: #000000;
+            font-weight: 600;
+            font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+            text-align: center;
+            background: #ffffff;
+            width: 100%;
+            margin: 0px;
+            min-height: 60px;
+            line-height: 60px;
+        }
+
+        .body .title {
+            text-align: center;
+
+        }
+
+        .title-li {
+            text-align: center;
+            min-height: 40px;
+            line-height: 40px;
+            font-size: 10px;
+            height: 40px;
+
+        }
+
+        .myButton1 {
+            top: 120px;
+            position: absolute;
+            height: 45px;
+            margin-top: 5px;
+            opacity: 100; /* 背景半透明 */
+            z-index: 3;
+            text-align: center;
+            width:68px;
+            height:45px;
+        }
+
+        .myButton2 {
+            top: 180px;
+            position: absolute;
+            height: 45px;
+            margin-top: 5px;
+            opacity: 100; /* 背景半透明 */
+            z-index: 3;
+            text-align: center;
+            width:68px;
+            height:45px;
+        }
+
+        #showModal {
+            top: 0px;
+            position: absolute;
+            display: none;
+            text-align: center;
+            z-index: 101;
+            background-color: #fff;
+
+        }
+
+        body {
+            padding: 0px;
+            margin: 0px;
+            height: 100%;
+        }
+    </style>
+</head>
+<body style="background: url('assets/img/backgrounds/1.jpg')" ng-app="myApp" ng-controller="customersCtrl" >
+
+<div class="row" id="showModal" >
+
+    <button class="btn btn-success myButton1 platform" style="left:40px;" platform="all">全网</button>
+
+    <button class="btn btn-success myButton1 platform" style="left:120px;" platform="iqy">爱奇艺</button>
+
+    <button class="btn btn-success myButton1 platform" style="left:200px;" platform="yk">优酷</button>
+
+    <button class="btn btn-success myButton1 platform" style="left:280px;" platform="qq">腾讯</button>
+
+    <button class="btn btn-success myButton2 platform" style="left:40px;" platform="let">乐视</button>
+
+    <button class="btn btn-success myButton2 platform" style="left:120px;" platform="mg">芒果TV</button>
+
+    <button class="btn btn-success myButton2 platform" style="left:200px;" platform="sh">搜狐</button>
+
+
+</div>
+
+<div class=".container" id="mymodal-overlay">
+</div>
+<div class=" container ">
+
+    <div class="row head container">
+        <div class="col-xs-4 head-cell">
+            <img class="logImg" src="assets/img/logo.png"/>
+        </div>
+        <div class="col-xs-5 head-cell">
+            <div class="input-group">
+                <input type="text" class="form-control" style="margin-top:13px;border-radius: 4px;width: 130px;float: right;" id="searchInput">
+            </div><!-- /input-group -->
+        </div>
+        <div class="col-xs-3  head-cell">
+            <a id="searchVa">艺</a>|<a id="searchTv">电</a>
+        </div>
+    </div>
+    <div class="row body " style="width: auto">
+        <div class="row menue">
+            <div class="col-xs-4 type" type="teleplay" id="teleplay">电视剧</div>
+            <div class="col-xs-4 type" type="variety"  id="variety">综艺</div>
+            <div class="col-xs-4  " id="more">更多▽</div>
+        </div>
+
+
+        <div class="all" data-role="page">
+            <div class="inner">
+                <!----1--->
+                <div>
+
+                    <table class="table"  id="pageone">
+                        <thead>
+                        <tr>
+                            <td style="border:1px solid #3c3c3c" class="title-li">剧名</td>
+                            <td style="border:1px solid #3c3c3c" class="title-li">集均播放量</td>
+                            <td style="border:1px solid #3c3c3c" class="title-li">播放总量</td>
+                        </tr>
+                        </thead>
+                        <tbody id="appendone">
+                        <tr  ng-repeat="x in names">
+                            <td>{{ x.name }}</td>
+                            <td>{{ x.avg_play }}</td>
+                            <td>{{ x.all_play_counts }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <!----1--->
+                <!----2--->
+                <div>
+
+                    <table class="table" style="width: 100%">
+                        <thead>
+                        <tr>
+                            <td style="border:1px solid #3c3c3c" class="title-li">今日播放量</td>
+                            <td style="border:1px solid #3c3c3c" class="title-li">更新_集/共_集</td>
+                            <td style="border:1px solid #3c3c3c" class="title-li">日期</td>
+                        </tr>
+                        </thead>
+                        <tbody id="appendtwo">
+                        <tr  ng-repeat="x in names">
+                            <td>{{ x.day_play_counts }}</td>
+                            <td>{{ x.current_number+'/'+x.all_number }}</td>
+                            <td>{{ x.time_at }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!----2--->
+
+            </div>
+        </div>
+        <div class="row footer" style="padding: 0px;margin: 0px;">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-6 threed">用数据发现新世界</div>
+            <div class="col-xs-3"></div>
+        </div>
+    </div>
+    <script src="assets/js/supersized.3.2.7.min.js"></script>
+    <script src="assets/js/supersized-init.js"></script>
+</div>
+</body>
+<script>
+
+    /***************************正则匹配参数修改全局变量以及数据初始化**************/
+    str =window.location.search;
+    var reg = new RegExp(/\?user_id=(\d)+&sid=((.?)+)/);
+    arr=str.match(reg);
+    user_id=arr[1];
+    sid=arr[2];
+    num=0;
+    type="teleplay";
+    platform="all";
+    limit=20;
+    offset=0;
+    order_by="day_play_counts";
+    _="1470066582355";
+    url="http://hnsdmp.com/api/v1/user/3/playinfo";
+    $("[type='teleplay']").css("background","#d1cdc8");
+    /******************************搜索***********************************/
+    $("#searchVa").click(function () {
+        type ="variety";
+       window.location.href="http://hnsdmp.com/two.html?name="+$("#searchInput").val()+"&type="+type+"&sid="+sid+"&user_id="+user_id;
+
+    })
+
+    $("#searchTv").click(function () {
+        type="teleplay";
+        window.location.href="http://hnsdmp.com/two.html?name="+$("#searchInput").val()+"&type="+type+"&sid="+sid+"&user_id="+user_id;
+
+    })
+
+    /************************** type选择******************************/
+    $("#teleplay").click(function () {
+        $(".type").css("background","#ffffff");
+         type =$(this).attr("type");
+        $(this).css("background","#d1cdc8");
+        num=0;
+        offset=0;
+        $("#appendone").empty();
+        $("#appendtwo").empty();
+        pageajax(type,  platform  ,limit  ,offset  ,sid , order_by  ,_,url);
+    })
+
+    $("#variety").click(function () {
+        $(".type").css("background","#ffffff");
+        type =$(this).attr("type");
+        $(this).css("background","#d1cdc8");
+        num=0;
+        offset=0;
+        $("#appendone").empty();
+        $("#appendtwo").empty();
+        pageajax(type,  platform  ,limit  ,offset  ,sid , order_by  ,_,url);
+    })
+    /***************************platform选择*****************************************/
+    $(".platform").click(function () {
+        platform = $(this).attr("platform");
+        //清空所有子节点 相关参数设置
+        num=0;
+        offset=0;
+        $("#appendone").empty();
+        $("#appendtwo").empty();
+        pageajax(type,  platform  ,limit  ,offset  ,sid , order_by  ,_,url);
+    });
+
+    /************************************左右滑动参数配置 ********/
+
+
+
+    $(".inner div").css("width", screen.width);
+    $(".inner ").css("width", screen.width * 2);
+    $(".body ").css("height", screen.height-60);
+    $(".inner ").css("height", screen.height -300);
+    $("body").css("height", screen.height);
+
+    /*3.设定每次移动的距离,和，最多移动的次数*/
+    Flipsnap('.inner',{
+        distance:screen.width,
+        maxPoint:2        //最多移动的次数
+    });
+
+/****************** * 菜单模态框的配置*************************************/
+
+    function overlay() {
+        var e1 = document.getElementById('mymodal-overlay');
+        var e2 = document.getElementById('modal-data');
+        e1.style.visibility = (e1.style.visibility == "visible"  ) ? "hidden" : "visible";
+        var sm = $("#showModal");
+        if (sm.css("display") == "none")
+            sm.css("display", "block");
+        else
+            sm.css("display", "none");
+    }
+
+    $("#more").click(function () {
+        overlay();
+    })
+    $(".myButton2").click(function () {
+        overlay();
+    })
+    $(".myButton1").click(function () {
+        overlay();
+    })
+
+/***********************************angular 数据绑定 初始化 * ************************/
+    var app = angular.module('myApp', []);
+    app.controller('customersCtrl', function($scope, $http) {
+        $http.get("http://hnsdmp.com/api/v1/user/"+user_id+"/playinfo?type=teleplay&platform=all&limit=20&offset=0&sid="+sid+"&order_by=day_play_counts&_=1470066582355")
+                .success(function(response) {
+
+                    $scope.names = response;
+                });
+    });
+/**********************************************8向下滚动事件的配置及数据的获取 *************/
+    $(window).bind('scroll', function() {
+        show()
+    });
+    function show() {
+        if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+            num++;
+            offset=num*20;
+            pageajax(type,  platform  ,limit  ,offset  ,sid , order_by  ,_,url);
+        }
+    }
+    /*********************数据重置*************************************************/
+
+
+/*******************************************************************
+ * function ajax 获取数据
+ * @param type
+ * @param platform
+ * @param limit
+ * @param offset
+ * @param sid
+ * @param order_by
+ * @param _
+ * @param url
+ */
+    function pageajax(type,  platform  ,limit  ,offset  ,sid , order_by  ,_,url)
+    {
+        var htmlone ="";
+        var htmltwo ="";
+        url+="?type="+type+"&platform="+platform+"&limit="+limit+"&offset="+offset+"&sid="+sid+"&order_by="+order_by+"&_="+_;
+
+        $.ajax({
+            url:url,
+            type:"get",
+            dataType:"json",
+            data:JSON.stringify({}),
+            success:function(data)
+            {
+               console.log(data);
+                if(data=='username or password error')
+                {
+                    alert("密码或者账号错误");
+                }
+                else
+                {
+                   for(var i =0;i<data.length;i++){
+                       htmlone+="<tr><td>"+data[i].name+"</td><td>"+data[i].avg_play+"</td><td>"+data[i].all_play_counts+"</td></tr>";
+                       htmltwo+="<tr><td>"+data[i].day_play_counts+"</td><td>"+data[i].current_number+"/"+data[i].all_number+"</td><td>"+data[i].time_at+"</td></tr>";
+                   }
+                    $("#appendone").append(htmlone);
+                    $("#appendtwo").append(htmltwo);
+                }
+            },
+            error:function()
+            {
+                alert("请求失败");
+            }
+        });
+    }
+</script>
+</html>
