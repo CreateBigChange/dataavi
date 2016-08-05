@@ -1,4 +1,6 @@
-$(document).ready(function(){
+
+
+
  /***************************正则匹配参数修改全局变量以及数据初始化**************/
     str =window.location.search;
     var reg = new RegExp(/\?user_id=(\d)+&sid=((.?)+)/);
@@ -99,15 +101,7 @@ $(document).ready(function(){
         overlay();
     })
 
-/***********************************angular 数据绑定 初始化 * ************************/
-    var app = angular.module('myApp', []);
-    app.controller('customersCtrl', function($scope, $http) {
-        $http.get("http://hnsdmp.com/api/v1/user/"+user_id+"/playinfo?type=teleplay&platform=all&limit=20&offset=0&sid="+sid+"&order_by=day_play_counts&_=1470066582355")
-                .success(function(response) {
 
-                    $scope.names = response;
-                });
-    });
 /**********************************************8向下滚动事件的配置及数据的获取 *************/
     $(window).bind('scroll', function() {
         show()
@@ -167,6 +161,16 @@ $(document).ready(function(){
             }
         });
     }
-});
+
+
+/***********************************angular 数据绑定 初始化 * ************************/
+    var app = angular.module('myApp', []);
+    app.controller('customersCtrl', function($scope, $http) {
+        $http.get("http://hnsdmp.com/api/v1/user/"+user_id+"/playinfo?type=teleplay&platform=all&limit=20&offset=0&sid="+sid+"&order_by=day_play_counts&_=1470066582355")
+                .success(function(response) {
+                    console.log(response);
+                    $scope.names = response;
+                });
+    });
 
    
