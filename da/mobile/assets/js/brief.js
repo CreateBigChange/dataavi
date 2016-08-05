@@ -1,9 +1,6 @@
 
 
 
-
-
-
  /***************************正则匹配参数修改全局变量以及数据初始化**************/
     str =window.location.search;
     var reg = new RegExp(/\?user_id=(\d)+&sid=((.?)+)/);
@@ -17,9 +14,11 @@
     offset=0;
     order_by="day_play_counts";
     _="1470066582355";
-    url="/api/v1/user/"+user_id+"/playinfo";
     $("[type='teleplay']").css("background","#d1cdc8");
     baseUrl =window.location.host;
+     //baseUrl="http://hnsdmp.com";
+     url=baseUrl+"/api/v1/user/"+user_id+"/playinfo";
+     detaiUrl =baseUrl+"/two.html?user_id="+user_id+"&sid="+sid;
     /******************************搜索***********************************/
     $("#searchVa").click(function () {
         type ="variety";
@@ -112,6 +111,7 @@
         if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
             num++;
             offset=num*20;
+    
             pageajax(type,  platform  ,limit  ,offset  ,sid , order_by  ,_,url);
         }
     }
@@ -131,12 +131,13 @@
  */
     function pageajax(type,  platform  ,limit  ,offset  ,sid , order_by  ,_,url)
     {
+      
         var htmlone ="";
         var htmltwo ="";
-        url+="?type="+type+"&platform="+platform+"&limit="+limit+"&offset="+offset+"&sid="+sid+"&order_by="+order_by+"&_="+_;
-
+        ajaxUrl=url+"?type="+type+"&platform="+platform+"&limit="+limit+"&offset="+offset+"&sid="+sid+"&order_by="+order_by+"&_="+_;
+        
         $.ajax({
-            url:url,
+            url:ajaxUrl,
             type:"get",
             dataType:"json",
             data:JSON.stringify({}),
@@ -150,8 +151,8 @@
                 else
                 {
                    for(var i =0;i<data.length;i++){
-                       htmlone+="<tr><td>"+data[i].name+"</td><td>"+data[i].avg_play+"</td><td>"+data[i].all_play_counts+"</td></tr>";
-                       htmltwo+="<tr><td>"+data[i].day_play_counts+"</td><td>"+data[i].current_number+"/"+data[i].all_number+"</td><td>"+data[i].time_at+"</td></tr>";
+                       htmlone+="<tr ><td><a class='mytr' href='"+detaiUrl+"&name="+data[i].name+"&type="+data[i].type+"'>"+data[i].name+"</a></td><td>"+data[i].avg_play+"</td><td>"+data[i].all_play_counts+"</td></tr>";
+                       htmltwo+="<tr ><td>"+data[i].day_play_counts+"</td><td>"+data[i].current_number+"/"+data[i].all_number+"</td><td>"+data[i].time_at+"</td></tr>";
                    }
                     $("#appendone").append(htmlone);
                     $("#appendtwo").append(htmltwo);
@@ -168,11 +169,13 @@
 /***********************************angular 数据绑定 初始化 * ************************/
     var app = angular.module('myApp', []);
     app.controller('customersCtrl', function($scope, $http) {
-        $http.get("/api/v1/user/"+user_id+"/playinfo?type=teleplay&platform=all&limit=20&offset=0&sid="+sid+"&order_by=day_play_counts&_=1470066582355")
+        $http.get(baseUrl+"/api/v1/user/"+user_id+"/playinfo?type=teleplay&platform=all&limit=20&offset=0&sid="+sid+"&order_by=day_play_counts&_=1470066582355")
                 .success(function(response) {
-                    console.log(response);
                     $scope.names = response;
+                    for(var i= 0;i<response.length;i++){
+                        $scope.names[i].url=detaiUrl+"&name="+response[i].name+"&type="+response[i].type;
+                    }
+                    
                 });
     });
 
-   

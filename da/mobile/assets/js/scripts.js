@@ -38,7 +38,7 @@ jQuery(document).ready(function() {
      * @param url
      */
 
-function ajax(username,passwd,url)
+function ajax(username,passwd,url,baseUrl)
     {
         $.ajax({
         url:url,
@@ -53,7 +53,8 @@ function ajax(username,passwd,url)
                 }   
                 else
                 {
-                    window.location.href="/mobile/Brief.html?user_id="+user.id+"&sid="+user.sid;
+                    baseUrl ="http://localhost";
+                    window.location.href=baseUrl+"/mobile/Brief.html?user_id="+user.id+"&sid="+user.sid;
                 }
         },
         error:function()
@@ -66,7 +67,11 @@ function ajax(username,passwd,url)
 $("#login").click(function () {
     var userName = $("#userName").val();
     var passWord = $("#passWord").val();
-    var url="/api/v1/user/login";
-    ajax(userName,passWord,url);
+   
+    baseUrl =window.location.host
+    // baseUrl = "http://hnsdmp.com";
+    var url=baseUrl+"/api/v1/user/login";
+    
+    ajax(userName,passWord,url,baseUrl);
 })
 });
