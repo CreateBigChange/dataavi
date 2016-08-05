@@ -66,7 +66,7 @@ function ajax(username,passwd,url)
 $("#login").click(function () {
     var userName = $("#userName").val();
     var passWord = $("#passWord").val();
-    var url="http://hnsdmp.com/api/v1/user/login";
+    var url="/api/v1/user/login";
     ajax(userName,passWord,url);
 })
 });

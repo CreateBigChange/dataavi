@@ -1,6 +1,9 @@
 
 
 
+
+
+
  /***************************正则匹配参数修改全局变量以及数据初始化**************/
     str =window.location.search;
     var reg = new RegExp(/\?user_id=(\d)+&sid=((.?)+)/);
@@ -14,19 +17,18 @@
     offset=0;
     order_by="day_play_counts";
     _="1470066582355";
-    url="http://hnsdmp.com/api/v1/user/3/playinfo";
+    url="/api/v1/user/"+user_id+"/playinfo";
     $("[type='teleplay']").css("background","#d1cdc8");
+    baseUrl =window.location.host;
     /******************************搜索***********************************/
     $("#searchVa").click(function () {
         type ="variety";
-       window.location.href="http://hnsdmp.com/two.html?name="+$("#searchInput").val()+"&type="+type+"&sid="+sid+"&user_id="+user_id;
-
+       window.location.href=baseUrl+"/two.html?name="+$("#searchInput").val()+"&type="+type+"&sid="+sid+"&user_id="+user_id;
     })
 
     $("#searchTv").click(function () {
         type="teleplay";
-        window.location.href="http://hnsdmp.com/two.html?name="+$("#searchInput").val()+"&type="+type+"&sid="+sid+"&user_id="+user_id;
-
+        window.location.href=baseUrl+"/two.html?name="+$("#searchInput").val()+"&type="+type+"&sid="+sid+"&user_id="+user_id;
     })
 
     /************************** type选择******************************/
@@ -166,7 +168,7 @@
 /***********************************angular 数据绑定 初始化 * ************************/
     var app = angular.module('myApp', []);
     app.controller('customersCtrl', function($scope, $http) {
-        $http.get("http://hnsdmp.com/api/v1/user/"+user_id+"/playinfo?type=teleplay&platform=all&limit=20&offset=0&sid="+sid+"&order_by=day_play_counts&_=1470066582355")
+        $http.get("/api/v1/user/"+user_id+"/playinfo?type=teleplay&platform=all&limit=20&offset=0&sid="+sid+"&order_by=day_play_counts&_=1470066582355")
                 .success(function(response) {
                     console.log(response);
                     $scope.names = response;
