@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <title>SDMP</title>
+    <meta name="keywords" content="顺丰数据管理平台"/>
+    <meta name="description" content="顺丰数据管理平台,手机版"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--JAVASRIPT-->
+    <script src="./public/assets/js/jquery.js"></script>
+    <script src="./public/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./public/assets/js/Angular.js"></script>
+
+    <script src="./public/assets/js/flisnap.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./public/assets/css/reset.css">
+    <link rel="stylesheet" href="./public/assets/css/supersized.css">
+    <link rel="stylesheet" href="./public/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+    <link rel="stylesheet" type="text/css" href="./public/assets/css/brief.css">
+
+</head>
+<body style="background: url('assets/img/backgrounds/1.jpg')" ng-app="myApp" ng-controller="customersCtrl" >
+
+<div class="row" id="showModal" >
+
+    <button class="btn btn-success myButton1 platform" style="left:40px;" platform="all">全网</button>
+
+    <button class="btn btn-success myButton1 platform" style="left:120px;" platform="iqy">爱奇艺</button>
+
+    <button class="btn btn-success myButton1 platform" style="left:200px;" platform="yk">优酷</button>
+
+    <button class="btn btn-success myButton1 platform" style="left:280px;" platform="qq">腾讯</button>
+
+    <button class="btn btn-success myButton2 platform" style="left:40px;" platform="let">乐视</button>
+
+    <button class="btn btn-success myButton2 platform" style="left:120px;" platform="mg">芒果TV</button>
+
+    <button class="btn btn-success myButton2 platform" style="left:200px;" platform="sh">搜狐</button>
+
+
+</div>
+
+<div class=".container" id="mymodal-overlay">
+</div>
+<div class=" container ">
+
+    <div class="row head container">
+        <div class="col-xs-4 head-cell">
+            <img class="logImg" src="assets/img/logo.png"/>
+        </div>
+        <div class="col-xs-5 head-cell">
+            <div class="input-group">
+                <input type="text" class="form-control" style="margin-top:13px;border-radius: 4px;width: 130px;float: right;" id="searchInput">
+            </div><!-- /input-group -->
+        </div>
+        <div class="col-xs-3  head-cell">
+            <a id="searchVa">艺</a>|<a id="searchTv">电</a>
+        </div>
+    </div>
+    <div class="row body " style="width: auto">
+        <div class="row menue">
+            <div class="col-xs-4 type" type="teleplay" id="teleplay">电视剧</div>
+            <div class="col-xs-4 type" type="variety"  id="variety">综艺</div>
+            <div class="col-xs-4  " id="more">更多▽</div>
+        </div>
+
+
+        <div class="all" data-role="page">
+            <div class="inner">
+
+                <div>
+
+                    <table class="table"  id="pageone">
+                        <thead>
+                        <tr>
+                            <td style="border:1px solid #3c3c3c" class="title-li">剧名</td>
+                            <td style="border:1px solid #3c3c3c" class="title-li">集均播放量</td>
+                            <td style="border:1px solid #3c3c3c" class="title-li">播放总量</td>
+                        </tr>
+                        </thead>
+                        <tbody id="appendone">
+                        <tr  ng-repeat="x in names">
+                            <td>{{ x.name }}</td>
+                            <td>{{ x.avg_play }}</td>
+                            <td>{{ x.all_play_counts }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+
+                <div>
+
+                    <table class="table" style="width: 100%">
+                        <thead>
+                        <tr>
+                            <td style="border:1px solid #3c3c3c" class="title-li">今日播放量</td>
+                            <td style="border:1px solid #3c3c3c" class="title-li">更新_集/共_集</td>
+                            <td style="border:1px solid #3c3c3c" class="title-li">日期</td>
+                        </tr>
+                        </thead>
+                        <tbody id="appendtwo">
+                        <tr  ng-repeat="x in names">
+                            <td>{{ x.day_play_counts }}</td>
+                            <td>{{ x.current_number+'/'+x.all_number }}</td>
+                            <td>{{ x.time_at }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="row footer" style="padding: 0px;margin: 0px;">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-6 threed">用数据发现新世界</div>
+            <div class="col-xs-3"></div>
+        </div>
+    </div>
+    <script src="./public/assets/js/supersized.3.2.7.min.js"></script>
+    <script src="./public/assets/js/supersized-init.js"></script>
+    <script src="./public/assets/js/biref.js"></script>
+</div>
+</body>
+</html>
