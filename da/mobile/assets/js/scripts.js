@@ -53,7 +53,7 @@ function ajax(username,passwd,url)
                 }   
                 else
                 {
-                    window.location.href="/mobileBrief.html?user_id="+user.id+"&sid="+user.sid;
+                    window.location.href="/Brief.html?user_id="+user.id+"&sid="+user.sid;
                 }
         },
         error:function()
