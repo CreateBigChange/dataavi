@@ -16,7 +16,7 @@
     _="1470066582355";
     $("[type='teleplay']").css("background","#d1cdc8");
     baseUrl =window.location.host;
-     //baseUrl="http://hnsdmp.com";
+    // baseUrl="http://hnsdmp.com";
      url=baseUrl+"/api/v1/user/"+user_id+"/playinfo";
      detaiUrl =baseUrl+"/two.html?user_id="+user_id+"&sid="+sid;
     /******************************搜索***********************************/
@@ -76,7 +76,7 @@
     /*3.设定每次移动的距离,和，最多移动的次数*/
     Flipsnap('.inner',{
         distance:screen.width,
-        maxPoint:2        //最多移动的次数
+        maxPoint:1       //最多移动的次数
     });
 
 /****************** * 菜单模态框的配置*************************************/
