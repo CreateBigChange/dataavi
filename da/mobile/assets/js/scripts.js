@@ -68,8 +68,9 @@ $("#login").click(function () {
     var userName = $("#userName").val();
     var passWord = $("#passWord").val();
    
-    baseUrl =window.location.host
-    // baseUrl = "http://hnsdmp.com";
+     baseUrl="";
+     //baseUrl =window.location.host
+     //baseUrl = "http://hnsdmp.com";
     var url=baseUrl+"/api/v1/user/login";
     
     ajax(userName,passWord,url,baseUrl);
