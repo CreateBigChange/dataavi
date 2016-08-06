@@ -53,7 +53,6 @@ function ajax(username,passwd,url,baseUrl)
                 }   
                 else
                 {
-                    baseUrl ="http://localhost";
                     window.location.href=baseUrl+"/mobile/Brief.html?user_id="+user.id+"&sid="+user.sid;
                 }
         },
@@ -70,7 +69,7 @@ $("#login").click(function () {
    
      baseUrl="";
      //baseUrl =window.location.host
-     //baseUrl = "http://hnsdmp.com";
+     // baseUrl = "http://hnsdmp.com";
     var url=baseUrl+"/api/v1/user/login";
     
     ajax(userName,passWord,url,baseUrl);
