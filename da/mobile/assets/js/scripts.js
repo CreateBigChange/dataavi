@@ -50,10 +50,10 @@ function ajax(username,passwd,url,baseUrl)
                 if(user=='username or password error')
                 {
                      alert("密码或者账号错误");
-                }   
+                }
                 else
                 {
-                    window.location.href=baseUrl+"/mobile/Brief.html?user_id="+user.id+"&sid="+user.sid;
+                    window.location.href=baseUrl+"/mobile/index.html?user_id="+user.id+"&sid="+user.sid;
                 }
         },
         error:function()
@@ -62,16 +62,16 @@ function ajax(username,passwd,url,baseUrl)
         }
         });
     }
-    
+
 $("#login").click(function () {
     var userName = $("#userName").val();
     var passWord = $("#passWord").val();
-   
+
      baseUrl="";
      //baseUrl =window.location.host
      // baseUrl = "http://hnsdmp.com";
     var url=baseUrl+"/api/v1/user/login";
-    
+
     ajax(userName,passWord,url,baseUrl);
 })
 });

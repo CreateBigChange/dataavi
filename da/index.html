@@ -6,14 +6,20 @@
     <link rel="stylesheet" href="./public/css/base.css" />
     <link rel="stylesheet" href="./public/css/dataavi.css" />
     <link rel="stylesheet" href="./public/css/nav.css" />
-    <script src="./env.js"></script>
+    <script src="./public/js/jquery.min.js"></script>
+    <script src="./public/js/utils.js"></script>
+    <script src="/public/js/redirect2m.js" type="text/javascript"></script>
+    <script>
+    user_id = $.getUrlParam("user_id");
+    sid = $.getUrlParam("sid");
+    uaredirect("/mobile/index.html?user_id=" + user_id + "&sid=" + sid);
+    </script>
+
     <script src="/public/js/react.js"></script>
     <script src="/public/js/react-dom.js"></script></head>
-    <script src="./public/js/jquery.min.js"></script>
 
 <body>
     <div id="dataavi"></div>
-    <script src="./public/js/utils.js"></script>
     <script src="./public/js/echarts-all.js"></script>
      <script type="text/javascript" src='./public/build/tv_info.js'>
     </script>
