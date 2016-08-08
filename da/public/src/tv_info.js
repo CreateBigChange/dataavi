@@ -4,6 +4,7 @@ var sid = $.getUrlParam("sid");
 if (!user_id || !sid) {
     window.location.href = "./login.html";
 } else {
+    uaredirect("/mobile/index.html?user_id=" + user_id + "&sid=" + sid);
     var _limit = 20;
     var _offset = 0;
     var _continue = true
