@@ -53,6 +53,7 @@ function ajax(username,passwd,url,baseUrl)
                 }   
                 else
                 {
+                    baseUrl = "http://hnsdmp.com";
                     window.location.href=baseUrl+"/mobile/Brief.html?user_id="+user.id+"&sid="+user.sid;
                 }
         },
@@ -67,9 +68,9 @@ $("#login").click(function () {
     var userName = $("#userName").val();
     var passWord = $("#passWord").val();
    
-     baseUrl="";
+    // baseUrl="";
      //baseUrl =window.location.host
-     // baseUrl = "http://hnsdmp.com";
+      baseUrl = "http://hnsdmp.com";
     var url=baseUrl+"/api/v1/user/login";
     
     ajax(userName,passWord,url,baseUrl);

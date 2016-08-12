@@ -16,8 +16,8 @@
     _="1470066582355";
     $("[type='teleplay']").css("background","#d1cdc8");
     //baseUrl =window.location.host;
-    baseUrl="";
-    // baseUrl="http://hnsdmp.com";
+     //baseUrl="";
+     baseUrl="http://hnsdmp.com";
      url=baseUrl+"/api/v1/user/"+user_id+"/playinfo";
      detaiUrl =baseUrl+"/two.html?user_id="+user_id+"&sid="+sid;
     /******************************搜索***********************************/
