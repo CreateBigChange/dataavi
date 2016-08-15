@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title id="home_title"></title>
+    <link rel="stylesheet" href="./public/css/upload.css" />
+    <script src="./env.js"></script>
+    <script src="./public/js/jquery.min.js"></script>
+<body>
+    <script src="./public/js/utils.js"></script>
+    <script src="./public/js/upload.js"></script>
+</body>
+    <table cellspacing=0>
+        <tbody>
+            <tr>
+                <td>选择文件</td>
+                <td><input type="file" id="file"  />  </td>
+                <!-- multiple="multiple" 可上传多个 -->
+                <td><button id="upload">上传</button></td>
+            </tr>
+        </tbody>
+        <tfoot >
+            <tr>
+                <td colspan="3" id="ps">为了爬虫性能，建议上传数量不要超过20条,上传文件类型为 excel[.xlsx后缀],具体内容格式如下</td>
+            </tr>
+            <tr><td>名字1</td></tr>
+            <tr><td>名字2</td></tr>
+            <tr><td>名字3</td></tr>
+            <tr><td>...</td></tr>
+        </tfoot>
+    </table>
+</html>

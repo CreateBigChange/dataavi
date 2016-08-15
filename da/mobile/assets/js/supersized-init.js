@@ -21,6 +21,7 @@ jQuery(function($){
         slide_links        : 'blank',    // Individual links for each slide (Options: false, 'num', 'name', 'blank')
         slides             : [    // Slideshow Images
                                  {image : 'assets/img/backgrounds/background.jpg'},
+
                            //      {image : 'assets/img/backgrounds/1.jpg'},
                          //        {image : 'assets/img/backgrounds/1.jpg'}
                        ]

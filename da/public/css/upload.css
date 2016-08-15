@@ -1,0 +1,27 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    min-height: 900px;
+    text-align: center;
+}
+
+table {
+    width: 500px;
+    margin: auto auto;
+    margin-top: 200px;
+}
+td {
+    border: 1px solid #f3f3f3;
+    padding: 3px;
+    height: 40px;
+}
+
+tfoot tr{
+    height: 40px;
+}
+
+#ps {
+    text-align: left;
+    color: red;
+}

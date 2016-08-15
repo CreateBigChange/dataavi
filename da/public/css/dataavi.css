@@ -18,7 +18,8 @@ a {
 }
 
 #gride_info td {
-    width: 120px;
+    width: 160px;
+    height: 50px;
     text-align: center;
 }
 table {
@@ -75,4 +76,8 @@ tbody > tr {
     text-align: center;
     line-height: 30px;
     padding: 5px
+}
+
+.order-by {
+    cursor: pointer;
 }

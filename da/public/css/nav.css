@@ -83,7 +83,7 @@ ul {
     border-right: 1px solid #fff !important;
 }
 
-#download {
+#download,#upload {
     display: inline-block;
     position: relative;
     float: right;
